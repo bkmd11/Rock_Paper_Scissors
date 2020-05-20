@@ -45,14 +45,17 @@ public class RockPaperScissors {
         winner = game_logic(choices_list.indexOf(player_one), choices_list.indexOf(player_two));
 
         System.out.println("You picked " + player_one + " and the computer picked " + player_two);
-        if (winner == 0) {
-            System.out.println("The game is a tie!");
-        }
-        else if (winner == 1) {
-            System.out.println("You win!");
-        }
-        else {
-            System.out.println("The computer wins!");
+
+        switch (winner) {
+            case 1:
+                System.out.println("You win!");
+                break;
+            case 2:
+                System.out.println("The computer wins!");
+                break;
+            default:
+                System.out.println("The game is a tie!");
+                break;
         }
         return winner;
     }
@@ -67,14 +70,15 @@ public class RockPaperScissors {
 
         for (int i = 0; i < 3; i++) {
             winner = the_game();
-            if (winner == 1) {
-                player++;
-            }
-            else if (winner == 2) {
-                computer++;
-            }
-            if ((player == 2) || (computer == 2)) {
-                break;
+            switch (winner) {
+                case 1:
+                    player++;
+                    break;
+                case 2:
+                    computer++;
+                    break;
+                default:
+                    break;
             }
         }
         System.out.println("Player: " + player);

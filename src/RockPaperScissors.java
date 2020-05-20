@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class RockPaperScissors {
+    public static List<String> choices_list = Arrays.asList("rock", "paper", "scissors");
     public static int game_logic(int player_one_choice, int player_two_choice) {
         int player_next_index;
 
@@ -31,18 +32,34 @@ public class RockPaperScissors {
 
         return choice;
     }
+    public static int get_index(String choice) {
+        int choice_index = -1;
 
+        choice_index = choices_list.indexOf(choice);
+
+        return choice_index;
+    }
     public static int the_game() {
         Random rand = new Random();
         String player_one = "";
         String player_two = "";
-        int winner = 0;
-        List<String> choices_list = Arrays.asList("rock", "paper", "scissors");
+        int player_choice_index = -1;
+        int computer_choice_index = -1;
+
+        int winner = -1;
+
         String random_choice = choices_list.get(rand.nextInt(choices_list.size()));
 
         player_one = make_choice();
+        player_choice_index = get_index(player_one);
+
+        if (player_choice_index == -1) {
+            return winner;
+        }
         player_two = random_choice;
-        winner = game_logic(choices_list.indexOf(player_one), choices_list.indexOf(player_two));
+        computer_choice_index = get_index(player_two);
+
+        winner = game_logic(player_choice_index, computer_choice_index);
 
         System.out.println("You picked " + player_one + " and the computer picked " + player_two);
 
@@ -68,9 +85,12 @@ public class RockPaperScissors {
         System.out.println("Lets play a game!");
         System.out.println("Best two out of three");
 
-        for (int i = 0; i < 3; i++) {
+        while ((player != 2) && (computer != 2)) {
             winner = the_game();
             switch (winner) {
+                case -1:
+                    System.out.println("You entered an invalid choice you fool!");
+                    break;
                 case 1:
                     player++;
                     break;
@@ -86,7 +106,7 @@ public class RockPaperScissors {
         if (player > computer) {
             System.out.println("You win the game!");
         }
-        else if (computer > player) {
+        else if (player < computer) {
             System.out.println("The computer won!");
         }
         else {

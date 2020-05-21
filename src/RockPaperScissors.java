@@ -85,7 +85,7 @@ public class RockPaperScissors {
         System.out.println("Lets play a game!");
         System.out.println("Best two out of three");
 
-        while ((player != 2) && (computer != 2)) {
+        do {
             winner = the_game();
             switch (winner) {
                 case -1:
@@ -100,7 +100,8 @@ public class RockPaperScissors {
                 default:
                     break;
             }
-        }
+        } while ((player != 2) && (computer != 2));
+
         System.out.println("Player: " + player);
         System.out.println("Computer: " + computer);
         if (player > computer) {

@@ -7,8 +7,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class RockPaperScissors {
+    // The option list for the game. Global so it doesn't need to be passed as an arg
     public static List<String> choices_list = Arrays.asList("rock", "paper", "scissors");
+
     public static int game_logic(int player_one_choice, int player_two_choice) {
+        // The game logic to determine which player wins
         int player_next_index;
 
         if (player_one_choice == player_two_choice) {
@@ -24,6 +27,7 @@ public class RockPaperScissors {
     }
 
     public static String make_choice(){
+        // Where the player makes their choice
         Scanner scnr = new Scanner(System.in);
         String choice;
 
@@ -32,20 +36,34 @@ public class RockPaperScissors {
 
         return choice;
     }
+
     public static int get_index(String choice) {
+        // Gets the index from the option list to compare who wins
         int choice_index = -1;
 
         choice_index = choices_list.indexOf(choice);
 
         return choice_index;
     }
+
+    public static String who_won_overall(int player_one, int player_two) {
+        // Determines who won the 2 out of 3
+        if (player_one > player_two) {
+            return "You win the game!";
+        }
+        else if (player_one < player_two) {
+            return "The computer won!";
+        }
+        else {
+            return "My programming does not allow for a tiebreaker";
+        }}
+
     public static int the_game() {
         Random rand = new Random();
         String player_one = "";
         String player_two = "";
         int player_choice_index = -1;
         int computer_choice_index = -1;
-
         int winner = -1;
 
         String random_choice = choices_list.get(rand.nextInt(choices_list.size()));
@@ -104,14 +122,6 @@ public class RockPaperScissors {
 
         System.out.println("Player: " + player);
         System.out.println("Computer: " + computer);
-        if (player > computer) {
-            System.out.println("You win the game!");
-        }
-        else if (player < computer) {
-            System.out.println("The computer won!");
-        }
-        else {
-            System.out.println("My programming does not allow for a tiebreaker");
+        System.out.println(who_won_overall(player, computer));
         }
     }
-}
